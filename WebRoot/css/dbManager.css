@@ -1,0 +1,41 @@
+@CHARSET "UTF-8";
+body{
+	margin: 0px;
+	padding: 0px;
+}
+.sqltext{
+	width: 80%;
+	position:absolute;
+	left:20%;
+	top:40px;
+	height: 72px;
+	border: 0px;
+	border-bottom: 1px;
+	border-left:1px;
+	border-style: solid;
+	border-color: #aaa;
+}
+.top{
+	height: 40px;
+	width: 100%;
+	background-color: ccc;
+}
+#searchText{
+	width: 20%;
+	font-size: 17px;
+}
+#buttonDiv{
+	background-color: #f4f4f4;
+}
+#buttonDiv a{
+	width: 65px;
+	margin-top: 8px;
+	margin-bottom: 8px;
+	margin-left: 5px;
+}
+#tab{
+	width: 80%;
+	position: absolute;
+	left: 20%;
+	top: 111px;
+}

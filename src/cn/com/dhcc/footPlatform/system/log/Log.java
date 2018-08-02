@@ -1,0 +1,83 @@
+package cn.com.dhcc.footPlatform.system.log;
+
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+import javax.servlet.http.HttpSession;
+
+import cn.com.dhcc.footPlatform.background.domain.UserInfo;
+import static cn.com.dhcc.footPlatform.system.filter.StringFilter.isNull;
+
+/**
+ * <b>日志池 20161018</b><br>
+ * <br>
+ * 
+ * @author @HL
+ * @change LMH
+ *
+ */
+public class Log {
+
+	private static Map<String, Log> map = null;
+
+	static {
+		map = new ConcurrentHashMap<String, Log>() {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = -2935371425002480297L;
+
+			{
+				put("", new Log());
+			}
+		};
+	}
+
+	private Log() {
+	}
+
+	public static Log getLog() {
+		return map.get("");
+	}
+
+	public static Log getLog(String loginer_id) {
+		if (isNull(loginer_id))
+			return getLog();
+		if (!map.containsKey(loginer_id)) {
+			Log log = new Log();
+			map.put(loginer_id, log);
+			return log;
+		}
+		return map.get(loginer_id);
+	}
+
+	public static Log getLog(HttpSession session) {
+		Object o = session.getAttribute("userLogin");
+		if (o == null)
+			return getLog();
+		return getLog(((UserInfo) o).getUserId());
+	}
+
+	public void info(String message) {
+		System.out.println(message);
+	}
+
+	public void debug(String message) {
+		System.out.println(message);
+	}
+
+	public void error(String message) {
+		System.out.println(message);
+	}
+
+	public static class staticLog {
+		private static Log log = null;
+		static {
+			log = map.get("");
+		}
+
+		public static void info(String message) {
+			log.info(message);
+		}
+	}
+}

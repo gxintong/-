@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.dhcc.footPlatform.background.dao.LawexampleMapper">
+  <resultMap id="BaseResultMap" type="cn.com.dhcc.footPlatform.background.domain.Lawexample">
+    <id column="eid" jdbcType="INTEGER" property="eid" />
+    <result column="etitile" jdbcType="VARCHAR" property="etitile" />
+    <result column="lawyer_id" jdbcType="VARCHAR" property="lawyerId" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="time" jdbcType="VARCHAR" property="time" />
+     <result column="name" jdbcType="VARCHAR" property="name" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.com.dhcc.footPlatform.background.domain.LawexampleWithBLOBs">
+    <result column="case_des" jdbcType="LONGVARCHAR" property="caseDes" />
+    <result column="process" jdbcType="LONGVARCHAR" property="process" />
+    <result column="result" jdbcType="LONGVARCHAR" property="result" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    eid, etitile, lawyer_id, type, time
+  </sql>
+  <sql id="Blob_Column_List">
+    case_des, process, result
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from lawexample
+    where eid = #{eid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from lawexample
+    where eid = #{eid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.com.dhcc.footPlatform.background.domain.LawexampleWithBLOBs">
+    insert into lawexample (etitile, lawyer_id, 
+      type, time, case_des, 
+      process, result)
+    values (#{etitile,jdbcType=VARCHAR}, #{lawyerId,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{time,jdbcType=VARCHAR}, #{caseDes,jdbcType=LONGVARCHAR}, 
+      #{process,jdbcType=LONGVARCHAR}, #{result,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.dhcc.footPlatform.background.domain.LawexampleWithBLOBs">
+    insert into lawexample
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="eid != null">
+        eid,
+      </if>
+      <if test="etitile != null">
+        etitile,
+      </if>
+      <if test="lawyerId != null">
+        lawyer_id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="time != null">
+        time,
+      </if>
+      <if test="caseDes != null">
+        case_des,
+      </if>
+      <if test="process != null">
+        process,
+      </if>
+      <if test="result != null">
+        result,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="eid != null">
+        #{eid,jdbcType=INTEGER},
+      </if>
+      <if test="etitile != null">
+        #{etitile,jdbcType=VARCHAR},
+      </if>
+      <if test="lawyerId != null">
+        #{lawyerId,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="caseDes != null">
+        #{caseDes,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="process != null">
+        #{process,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="result != null">
+        #{result,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.dhcc.footPlatform.background.domain.LawexampleWithBLOBs">
+    update lawexample
+    <set>
+      <if test="etitile != null">
+        etitile = #{etitile,jdbcType=VARCHAR},
+      </if>
+      <if test="lawyerId != null">
+        lawyer_id = #{lawyerId,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        time = #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="caseDes != null">
+        case_des = #{caseDes,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="process != null">
+        process = #{process,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="result != null">
+        result = #{result,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where eid = #{eid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.com.dhcc.footPlatform.background.domain.LawexampleWithBLOBs">
+    update lawexample
+    set etitile = #{etitile,jdbcType=VARCHAR},
+      lawyer_id = #{lawyerId,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      time = #{time,jdbcType=VARCHAR},
+      case_des = #{caseDes,jdbcType=LONGVARCHAR},
+      process = #{process,jdbcType=LONGVARCHAR},
+      result = #{result,jdbcType=LONGVARCHAR}
+    where eid = #{eid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.dhcc.footPlatform.background.domain.Lawexample">
+    update lawexample
+    set etitile = #{etitile,jdbcType=VARCHAR},
+      lawyer_id = #{lawyerId,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      time = #{time,jdbcType=VARCHAR}
+    where eid = #{eid,jdbcType=INTEGER}
+  </update>
+   <select id="seleLawexample" parameterType="cn.com.dhcc.footPlatform.background.domain.Lawexample" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />,b.name
+    from lawexample a left join lawyer_info b on a.lawyer_id=b.user_id
+    where 1=1
+    <if test="lawyerId != null">
+     and lawyer_id = #{lawyerId,jdbcType=VARCHAR}
+      </if>
+        <if test="type != null">
+     and type like CONCAT('%',#{type,jdbcType=VARCHAR},'%')
+      </if>
+  </select>
+</mapper>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.dhcc.footPlatform.background.dao.ImageInfoMapper">
+  <resultMap id="BaseResultMap" type="cn.com.dhcc.footPlatform.background.domain.ImageInfo">
+    <id column="image_id" jdbcType="INTEGER" property="imageId" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="image_path" jdbcType="VARCHAR" property="imagePath" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    image_id, user_id, image_path
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from image_info
+    where image_id = #{imageId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from image_info
+    where image_id = #{imageId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.com.dhcc.footPlatform.background.domain.ImageInfo">
+    insert into image_info (user_id, image_path
+      )
+    values (#{userId,jdbcType=VARCHAR}, #{imagePath,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.dhcc.footPlatform.background.domain.ImageInfo">
+    insert into image_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="imageId != null">
+        image_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="imagePath != null">
+        image_path,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="imageId != null">
+        #{imageId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="imagePath != null">
+        #{imagePath,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.dhcc.footPlatform.background.domain.ImageInfo">
+    update image_info
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="imagePath != null">
+        image_path = #{imagePath,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where image_id = #{imageId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.dhcc.footPlatform.background.domain.ImageInfo">
+    update image_info
+    set user_id = #{userId,jdbcType=VARCHAR},
+      image_path = #{imagePath,jdbcType=VARCHAR}
+    where image_id = #{imageId,jdbcType=INTEGER}
+  </update>
+</mapper>

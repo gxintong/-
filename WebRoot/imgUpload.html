@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>imgUpload.html</title>
+    <meta http-equiv="Content-Type" content="multipart/form-data; charset=utf-8" />
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet">
+    <link href="plug_in_unit/bootstrap-fileinput/css/fileinput.css" media="all" rel="stylesheet" type="text/css"/>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="plug_in_unit/bootstrap-fileinput/js/fileinput.js" type="text/javascript"></script>
+    <script src="plug_in_unit/bootstrap-fileinput/themes/explorer-fa/theme.js" type="text/javascript"></script>
+    <script src="plug_in_unit/bootstrap-fileinput/themes/fa/theme.js" type="text/javascript"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" type="text/javascript"></script>
+  <script>
+    var image = ''; 
+     function setImg(obj){//用于进行图片上传，返回地址
+            var f=$(obj).val();
+            
+            alert(f);
+           
+            if(f == null || f ==undefined || f == ''){
+                return false;
+            }
+            if(!/\.(?:png|jpg|bmp|gif|PNG|JPG|BMP|GIF)$/.test(f))
+            {
+                $(obj).val('');
+                return false;
+            }
+             var reader = new FileReader(); 
+             reader.onload = function(evt){ 
+             document.getElementById('image').src = evt.target.result; 
+                image = evt.target.result; 
+    } 
+                reader.readAsDataURL(obj.files[0]); 
+            var data = new FormData();
+            $.each($(obj)[0].files,function(i,file){
+                data.append('file', file);
+            });
+            console.info(data);
+            $.ajax({
+                type: "POST",
+                url: "image/imageUpload.do",
+                data: data,
+                cache: false,
+                contentType: false,    //不可缺
+                processData: false,    //不可缺
+                dataType:"json",
+                success: function(suc) {
+                    if(suc.code==0){
+                      $("#thumbUrl").val(suc.message);//将地址存储好
+                      $("#thumburlShow").attr("src",suc.message);//显示图片
+                      
+                          alert("上传成功") ;                                  
+                        }else{
+                        alert("上传失败") ; 
+                       
+                    }
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    
+                }
+            });
+        } 
+  </script>
+  
+  <body>
+     <img id="image"src=""/> <br/> 
+     <input type="hidden" name="img"  id="thumbUrl"/>
+     <input type="file" name="logoFile" id="logoFile"  onchange="setImg(this);"/>
+     <span><img id="thumburlShow" src="" width="120" height="120"/></span>
+
+
+
+  </body>
+</html>

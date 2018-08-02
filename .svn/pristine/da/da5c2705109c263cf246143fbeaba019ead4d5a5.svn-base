@@ -1,0 +1,51 @@
+package cn.com.dhcc.footPlatform.background.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import cn.com.dhcc.footPlatform.background.dao.UserMapper;
+import cn.com.dhcc.footPlatform.background.domain.User;
+import cn.com.dhcc.footPlatform.background.service.IUserService;
+/**
+ * 
+ * @author lihang
+ * @date  2016年10月17 下午4:45:32
+ * @description userservice 实现类
+ */
+@Service
+public class UserServiceImpl implements IUserService {
+   
+	@Autowired
+	private UserMapper userMapper;
+	
+	
+	public User login(String username, String password) {
+		User userForFind = new User ();
+		userForFind.setUsername(username);
+		userForFind.setPassword(password);
+		User userFind = userMapper.findByNameAndPass(userForFind);
+		
+		if(userFind!=null){
+			
+			return userFind;
+		}
+		
+		return null;
+	}
+
+
+	public int changePass(User user) {
+		
+		
+		Integer result = userMapper.updateForPassword(user);
+		if(result!=null&&result!=0){
+			
+			return 1;
+		}
+		
+		return 0;
+	}
+
+	
+	
+}

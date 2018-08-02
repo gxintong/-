@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.dhcc.footPlatform.background.dao.ReplyInfoMapper">
+  <resultMap id="BaseResultMap"  type="cn.com.dhcc.footPlatform.background.domain.ReplyInfo">
+    <id column="reply_id" jdbcType="INTEGER" property="replyId" />
+    <result column="receiver" jdbcType="VARCHAR" property="receiver" />
+    <result column="send" jdbcType="VARCHAR" property="send" />
+    <result column="time" jdbcType="VARCHAR" property="time" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="mark" jdbcType="VARCHAR" property="mark" />
+    <result column="consult_id" jdbcType="INTEGER" property="consultId" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="grade" jdbcType="INTEGER" property="grade" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+     <result column="cmark" jdbcType="VARCHAR" property="cmark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    reply_id, receiver, send, time, status, mark, consult_id, grade
+  </sql>
+  <sql id="Blob_Column_List">
+    content
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from reply_info
+    where reply_id = #{replyId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from reply_info
+    where reply_id = #{replyId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.com.dhcc.footPlatform.background.domain.ReplyInfo">
+    insert into reply_info (receiver, send, 
+      time, status, mark, 
+      consult_id,content
+      )
+    values (#{receiver,jdbcType=VARCHAR}, #{send,jdbcType=VARCHAR}, 
+      #{time,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{mark,jdbcType=VARCHAR}, 
+      #{consultId,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.dhcc.footPlatform.background.domain.ReplyInfo">
+    insert into reply_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="replyId != null">
+        reply_id,
+      </if>
+      <if test="receiver != null">
+        receiver,
+      </if>
+      <if test="send != null">
+        send,
+      </if>
+      <if test="time != null">
+        time,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="mark != null">
+        mark,
+      </if>
+      <if test="consultId != null">
+        consult_id,
+      </if>
+      <if test="grade != null">
+        grade,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="replyId != null">
+        #{replyId,jdbcType=INTEGER},
+      </if>
+      <if test="receiver != null">
+        #{receiver,jdbcType=VARCHAR},
+      </if>
+      <if test="send != null">
+        #{send,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="mark != null">
+        #{mark,jdbcType=VARCHAR},
+      </if>
+      <if test="consultId != null">
+        #{consultId,jdbcType=INTEGER},
+      </if>
+      <if test="grade != null">
+        #{grade,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.dhcc.footPlatform.background.domain.ReplyInfo">
+    update reply_info
+    <set>
+      <if test="receiver != null">
+        receiver = #{receiver,jdbcType=VARCHAR},
+      </if>
+      <if test="send != null">
+        send = #{send,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        time = #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="mark != null">
+        mark = #{mark,jdbcType=VARCHAR},
+      </if>
+      <if test="consultId != null">
+        consult_id = #{consultId,jdbcType=INTEGER},
+      </if>
+      <if test="grade != null">
+        grade = #{grade,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where reply_id = #{replyId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.com.dhcc.footPlatform.background.domain.ReplyInfo">
+    update reply_info
+    set receiver = #{receiver,jdbcType=VARCHAR},
+      send = #{send,jdbcType=VARCHAR},
+      time = #{time,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      mark = #{mark,jdbcType=VARCHAR},
+      consult_id = #{consultId,jdbcType=INTEGER},
+      grade = #{grade,jdbcType=INTEGER},
+      content = #{content,jdbcType=VARCHAR}
+    where reply_id = #{replyId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.dhcc.footPlatform.background.domain.ReplyInfo">
+    update reply_info
+    set receiver = #{receiver,jdbcType=VARCHAR},
+      send = #{send,jdbcType=VARCHAR},
+      time = #{time,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      mark = #{mark,jdbcType=VARCHAR},
+      consult_id = #{consultId,jdbcType=INTEGER},
+      grade = #{grade,jdbcType=INTEGER}
+    where reply_id = #{replyId,jdbcType=INTEGER}
+  </update>
+  <!-- 查找未读消息数量 -->
+  <select id="countReply" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select count(*)  from reply_info
+    where mark='0' and receiver = #{userId,jdbcType=VARCHAR}
+  </select>
+  <!-- 用户查看律师回复 -->
+  <select id="selecReplyInfo" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select a.*, b.name,b.phone,c.mark as cmark from reply_info a right join consult_info c on a.consult_id=c.consule_id  left join lawyer_info b on a.send=b.user_id
+    
+    where 1=1
+    <if test="userId != null">
+      And receiver= #{userId,jdbcType=INTEGER}
+      </if>
+       <if test="consuleId != null">
+      And consult_id= #{consuleId,jdbcType=INTEGER}
+      </if>
+  </select>
+  <update id="changeMark" parameterType="java.lang.Integer">
+    update reply_info
+    set mark ='1'
+    where reply_id = #{replyId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,108 @@
+package cn.com.dhcc.footPlatform.background.controller;
+
+import java.util.*;
+
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import cn.com.dhcc.footPlatform.background.domain.User;
+import cn.com.dhcc.footPlatform.background.service.IUserService;
+import cn.com.dhcc.footPlatform.system.log.Log;
+
+/**
+ * 
+ * @author lihang
+ * @date 2016年10月17日 下午4:53:52
+ * @description user controller
+ */
+@Controller
+@RequestMapping("user")
+public class UserLoginController {
+	@Autowired
+	private IUserService iUserService;
+
+	/**
+	 * 用户登录
+	 * @author lihang
+	 * @param username
+	 * @param password
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/login")
+	public String login(String username, String password,
+			HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		Log log = Log.getLog(username);
+		User user = iUserService.login(username, password);
+		if (user!=null) {
+			session.setAttribute("userLogin", user);
+			log.info("登陆成功！");
+			return "main";
+		}
+		// 添加错误信息
+		session.setAttribute("error", "登陆信息错误!");
+		log.info("登陆失败！");
+		return "login_error";
+
+	}
+    
+	/**
+	 * 测试拦截器
+	 * @return
+	 */
+	@RequestMapping("/test")
+	public String test() {
+
+		return "test";
+	}
+	
+	/**
+	 * 用户注销 退出登录
+	 * @author lihang
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/logout")
+	public String  logout(HttpServletRequest request){
+		HttpSession session = request.getSession();
+		session.removeAttribute("userLogin");
+		return "login_error";
+	}
+    
+	/**
+	 * 跳转到更改密码界面
+	 * @author lihang
+	 * @return
+	 */
+	@RequestMapping("/goToChange")
+	public String goToChange(){
+		
+		return "changePass";
+	}
+	
+	/**
+     * 用户修改密码
+     * @author lihang
+     * @param request
+     * @param password
+     * @return
+     */
+	@RequestMapping("/changePass")
+	public String  changePass(HttpServletRequest request,String password){
+		
+		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute("userLogin");
+		if(!user.getPassword().equals(password)){
+		    user.setPassword(password);
+		    iUserService.changePass(user);
+		}
+		return "login_error";
+	}
+	
+}

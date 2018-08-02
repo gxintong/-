@@ -1,0 +1,15 @@
+@CHARSET "UTF-8";
+.first_tuijian{width:100%;min-width:1200px;height:300px;margin-left:50px;margin-bottom:10px;}
+.tuijian{width:187px;height:267px;background-color:#fff;box-shadow:0px 0px 10px #ccc;margin:10px;}
+ .first_tuijian ul li{text-align:center;float:left;}//重要，居中
+.item-img{vertical-align:middle;text-align:center;}
+.first_tuijian img{border-radius:100%;width:100px;height:100px;}
+.item-name{margin-top:10px;font-size:18px;}
+.item-number{margin-top:10px;}
+.item-id{font-size:13px;color:#666;}
+.item-number{margin-top:20px;font-size:12px;color:#999;}
+.item-unit{margin-top:5px;font-size:12px;color:#999;}
+#search{width:100%;min-width:1200px;height:70px;background:#DCDCDC; padding-top:15px;padding-left:40px;}
+#form1 input{height:40px;}
+#form1 select{height:40px;}
+.btn1{width:100px;margin-left:5px;background:#0000AA;color:#fff;font-weight:bold; font-size:13px;border-radius:10px;}

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.dhcc.footPlatform.background.dao.AnnouncementInfoMapper">
+  <resultMap id="BaseResultMap" type="cn.com.dhcc.footPlatform.background.domain.AnnouncementInfo">
+    <id column="aid" jdbcType="INTEGER" property="aid" />
+    <result column="atitle" jdbcType="VARCHAR" property="atitle" />
+    <result column="acontent" jdbcType="VARCHAR" property="acontent" />
+    <result column="time" jdbcType="VARCHAR" property="time" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    aid, atitle, acontent, time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from announcement_info
+    where aid = #{aid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from announcement_info
+    where aid = #{aid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.com.dhcc.footPlatform.background.domain.AnnouncementInfo">
+    insert into announcement_info (atitle, acontent, 
+      time)
+    values (#{atitle,jdbcType=VARCHAR}, #{acontent,jdbcType=VARCHAR}, 
+      #{time,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.dhcc.footPlatform.background.domain.AnnouncementInfo">
+    insert into announcement_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="aid != null">
+        aid,
+      </if>
+      <if test="atitle != null">
+        atitle,
+      </if>
+      <if test="acontent != null">
+        acontent,
+      </if>
+      <if test="time != null">
+        time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="aid != null">
+        #{aid,jdbcType=INTEGER},
+      </if>
+      <if test="atitle != null">
+        #{atitle,jdbcType=VARCHAR},
+      </if>
+      <if test="acontent != null">
+        #{acontent,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.dhcc.footPlatform.background.domain.AnnouncementInfo">
+    update announcement_info
+    <set>
+      <if test="atitle != null">
+        atitle = #{atitle,jdbcType=VARCHAR},
+      </if>
+      <if test="acontent != null">
+        acontent = #{acontent,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        time = #{time,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where aid = #{aid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.dhcc.footPlatform.background.domain.AnnouncementInfo">
+    update announcement_info
+    set atitle = #{atitle,jdbcType=VARCHAR},
+      acontent = #{acontent,jdbcType=VARCHAR},
+      time = #{time,jdbcType=VARCHAR}
+    where aid = #{aid,jdbcType=INTEGER}
+  </update>
+  <select id="selectNotice" resultMap="BaseResultMap">
+  select * from announcement_info
+  </select>
+</mapper>

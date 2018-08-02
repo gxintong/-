@@ -1,0 +1,55 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <base href="<%=basePath%>">
+    
+    <title>数据库管理</title>
+    
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	
+  <link rel="stylesheet" href="<%=basePath%>bootstrap_3.3.7/css/bootstrap.min.css" type="text/css"></link>
+  <link rel="stylesheet" href="<%=basePath %>css/dbManager.css" type="text/css"></link>
+  <script type="text/javascript" src="<%=basePath %>bootstrap_3.3.7/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="<%=basePath %>bootstrap_3.3.7/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="<%=basePath %>js/dbManager.js"></script>
+  </head>
+  
+  <body>
+    <div id="all">
+    	<div class="input-group input-group-lg">
+  			<input type="text" class="form-control">
+  			<button class="input-group-addon">执行</button>
+		</div>
+    	<div id="tableList" class="tableList">
+    		<div class="input-group input-group">
+  			<input type="text" class="form-control">
+  			<button class="input-group-addon">查询</button>
+  			
+		</div>
+		<div id="tableList" class="tableList">
+			<ul class="nav nav-pills nav-stacked" role="tablist">
+			  <li role="presentation"><a href="#">Home</a></li>
+			  <li role="presentation"><a href="#">Profile</a></li>
+			  <li role="presentation"><a href="#">Messages</a></li>
+			</ul>
+		</div>
+		<div id="dataTable" class="dataTable">
+			<ul class="nav nav-tabs" role="tablist">
+			  <li role="presentation" class="active"><a href="wqe.jsp">Home</a></li>
+			  <li role="presentation"><a href="#">Profile</a></li>
+			  <li role="presentation"><a href="#">Messages</a></li>
+			</ul>
+    	</div>
+    </div>
+  </body>
+</html>

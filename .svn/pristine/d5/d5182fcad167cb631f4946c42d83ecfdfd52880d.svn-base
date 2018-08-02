@@ -1,0 +1,4 @@
+jdbc.url = jdbc\:oracle\:thin\:@192.168.7.106\:1521\:orcl
+jdbc.driverClassName = oracle.jdbc.driver.OracleDriver
+jdbc.username= cwbb
+jdbc.password= pass

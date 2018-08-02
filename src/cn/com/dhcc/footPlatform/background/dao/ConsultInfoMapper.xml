@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.dhcc.footPlatform.background.dao.ConsultInfoMapper">
+  <resultMap id="BaseResultMap" type="cn.com.dhcc.footPlatform.background.domain.ConsultInfo">
+    <id column="consule_id" jdbcType="INTEGER" property="consuleId" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="time" jdbcType="VARCHAR" property="time" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="pid" jdbcType="VARCHAR" property="pid" />
+    <result column="cid" jdbcType="VARCHAR" property="cid" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="lawyer_id" jdbcType="VARCHAR" property="lawyerId" />
+     <result column="mark" jdbcType="VARCHAR" property="mark" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.com.dhcc.footPlatform.background.domain.ConsultInfo">
+    <result column="description" jdbcType="LONGVARCHAR" property="description" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    consule_id, type, user_id, time, status, pid, cid
+  </sql>
+  <sql id="Blob_Column_List">
+    description
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from consult_info
+    where consule_id = #{consuleId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from consult_info
+    where consule_id = #{consuleId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.com.dhcc.footPlatform.background.domain.ConsultInfo">
+    insert into consult_info (type, user_id, 
+      time, status, pid, 
+      cid, description)
+    values (#{type,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, 
+      #{time,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{pid,jdbcType=VARCHAR}, 
+      #{cid,jdbcType=VARCHAR}, #{description,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.dhcc.footPlatform.background.domain.ConsultInfo">
+    insert into consult_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="type != null">
+        type,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="time != null">
+        time,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="pid != null">
+        pid,
+      </if>
+      <if test="cid != null">
+        cid,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+       <if test="lawyerId != null">
+        lawyer_id,
+      </if>
+      <if test="mark != null">
+        mark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null">
+        #{pid,jdbcType=VARCHAR},
+      </if>
+      <if test="cid != null">
+        #{cid,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+       <if test="lawyerId != null">
+        #{lawyerId,jdbcType=VARCHAR},
+      </if>
+       <if test="mark != null">
+        #{mark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.dhcc.footPlatform.background.domain.ConsultInfo">
+    update consult_info
+    <set>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        time = #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null">
+        pid = #{pid,jdbcType=VARCHAR},
+      </if>
+      <if test="cid != null">
+        cid = #{cid,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where consule_id = #{consuleId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.com.dhcc.footPlatform.background.domain.ConsultInfo">
+    update consult_info
+    set type = #{type,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
+      time = #{time,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      pid = #{pid,jdbcType=VARCHAR},
+      cid = #{cid,jdbcType=VARCHAR},
+      description = #{description,jdbcType=LONGVARCHAR}
+    where consule_id = #{consuleId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.dhcc.footPlatform.background.domain.ConsultInfo">
+    update consult_info
+    set type = #{type,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
+      time = #{time,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      pid = #{pid,jdbcType=VARCHAR},
+      cid = #{cid,jdbcType=VARCHAR}
+    where consule_id = #{consuleId,jdbcType=INTEGER}
+  </update>
+  <!-- 查找咨询信息 -->
+  <select id="selectConsultInfo" parameterType="cn.com.dhcc.footPlatform.background.domain.ConsultInfo" resultMap="BaseResultMap">
+     select a.consule_id,a.type,a.description,a.user_id,a.time,a.pid,a.cid,(case a.mark when '1' then '公开咨询' when '2' then '一对一咨询' when '3' then '企业法律咨询'  end)as mark,a.lawyer_id,b.content,(case a.status when '0' then '未回复' when '1' then '已回复' end)as status from consult_info a
+     left join reply_info b on  a.consule_id=b.consult_id
+       WHERE 1=1
+     <if test="mark != null">
+     <if test="mark !=''">
+       AND trim(a.mark)=#{mark,jdbcType=VARCHAR}
+      </if>
+       </if>
+        <if test="status != null">
+      <if test="status !=''">
+      AND trim(a.status)=#{status,jdbcType=VARCHAR}
+      </if> 
+      </if>
+       <if test="type!= null">
+      <if test="type!=''">
+      AND trim(type) like CONCAT('%',#{type,jdbcType=VARCHAR},'%')
+      </if> 
+      </if> 
+    <!-- <if test="_parameter != null"> 
+    AND  a.mark = #{mark,jdbcType=VARCHAR}
+      </if> --> 
+   
+  </select>
+  <select id="selectConsultInfoById" parameterType="cn.com.dhcc.footPlatform.background.domain.ConsultInfo" resultMap="BaseResultMap">
+     select consule_id,type,description,user_id,time,pid,cid,lawyer_id,(case status when '0' then '未回复' when '1' then '已回复' end)as status from consult_info 
+      WHERE 1=1
+      <if test="userId!= null">
+      AND  user_id = #{userId,jdbcType=VARCHAR}
+     </if> 
+    <if test="mark!= null">
+      AND  mark = #{mark,jdbcType=VARCHAR}
+     </if> 
+  
+     <if test="consuleId!= null">
+      AND  consule_id = #{consuleId,jdbcType=VARCHAR}
+     </if> 
+  </select>
+  <update id="updateStatus" parameterType="java.lang.Integer">
+    update consult_info
+    set  status ='1'
+    where consule_id = #{consuleId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="config"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.j2eedt.core.MYECLIPSE_JAVAEE_6_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="D:/mybatis/mybatis/mybatis/mysql-connector-java-5.0.8-bin.jar"/>
+	<classpathentry kind="lib" path="D:/commons-beanutils-1.8.0.jar"/>
+	<classpathentry kind="lib" path="D:/commons-collections-3.2.1.jar"/>
+	<classpathentry kind="lib" path="D:/commons-lang-2.4.jar"/>
+	<classpathentry kind="lib" path="D:/commons-logging.jar"/>
+	<classpathentry kind="lib" path="D:/用户目录/我的图片/新建文件夹/51CTO下载-JSON标配/JSON/commons-beanutils.jar"/>
+	<classpathentry kind="lib" path="D:/用户目录/我的图片/新建文件夹/51CTO下载-JSON标配/JSON/commons-collections-3.1.jar"/>
+	<classpathentry kind="lib" path="D:/用户目录/我的图片/新建文件夹/51CTO下载-JSON标配/JSON/commons-lang3-3.1.jar"/>
+	<classpathentry kind="lib" path="D:/用户目录/我的图片/新建文件夹/51CTO下载-JSON标配/JSON/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="D:/用户目录/我的图片/新建文件夹/51CTO下载-JSON标配/JSON/ezmorph-1.0.6.jar"/>
+	<classpathentry kind="lib" path="D:/用户目录/我的图片/新建文件夹/51CTO下载-JSON标配/JSON/json-lib-2.1.jar"/>
+	<classpathentry kind="lib" path="D:/fastjson-1.1.22.jar"/>
+	<classpathentry kind="lib" path="D:/commons-fileupload-1.3.2.jar"/>
+	<classpathentry kind="lib" path="D:/commons-io-2.4.jar"/>
+	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
+</classpath>

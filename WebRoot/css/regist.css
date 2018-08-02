@@ -1,0 +1,14 @@
+@CHARSET "UTF-8";
+ .my-lvban-con{height:700px;background:#F5F5F5;}
+ .registcontent{position:relative;top:70;}
+ .my-lvban-box{background-color:#fff;width:1015px;height:500px;} 
+ .my-lvban-box ul li{width:507px;text-align:center;} 
+ .my-lvban-nav.nav-tabs>li{margin-bottom:0;}
+ .my-lvban-nav.nav-tabs>li>a{font-size:18px;color:#333;background-color:#fff;margin:0;border:none;border-bottom:2px solid transparent;border-radius:0;padding:10px 20px;}
+ .my-lvban-nav.nav-tabs>.active>a{color:#0049a7;background-color:#fff;border-bottom:2px solid #0049a7;}
+.my-lvban-nav.nav-tabs>li>a:hover,.my-lvban-nav.nav-tabs>li>a:focus{color:#0049a7;border:none;border-bottom:2px solid #0049a7;}
+ #home>.join_form {width:500px;margin:0 auto;}
+.form-inline .form-control{width:80%;margin:10px;}
+.btn{width:200px;margin:0 250px;}
+#menu1>.join_form{width:800px;margin:0 auto;padding:20px;}
+#menu1>.join_form input{width:210px;}

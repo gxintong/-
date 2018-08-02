@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="footplatform"
+  id="myeclipse.1477374385839"
+  context-root="/footplatform"
+  j2ee-spec="6.0"
+  archive="footplatform.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

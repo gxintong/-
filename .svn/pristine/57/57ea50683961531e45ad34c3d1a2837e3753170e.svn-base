@@ -1,0 +1,123 @@
+package cn.com.dhcc.footPlatform.system.cache.cacheImplement;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import net.sf.json.JSONObject;
+
+import cn.com.dhcc.footPlatform.system.cache.CacheManage;
+
+public class TranslateCache extends CacheManage {
+    
+	private List<Map<String,String>> columns ;
+	private static String url="jdbc:oracle:thin:@192.168.7.106:1521:orcl";
+	private static String driver="oracle.jdbc.driver.OracleDriver";
+	private static String username="cwbb";
+	private static String password="pass";
+
+    
+	
+	
+	@Override
+	protected String put() throws SQLException, Exception {
+		// TODO Auto-generated method stub
+		 List<Map<String,String>> res=new ArrayList<Map<String,String>>();
+			Connection con = null;
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+		    try {
+				con =DriverManager.getConnection(url, username, password);
+				ps =con.prepareStatement("Select * from  TRANSLATE_COL ");
+				rs=ps.executeQuery();
+				while(rs.next()){
+					Map<String,String> tmp = new HashMap<String, String>();
+					tmp.put("TAB_NAME", rs.getString("TAB_NAME"));
+					tmp.put("COL_NAME", rs.getString("COL_NAME"));
+					tmp.put("ITEM_NO", rs.getString("ITEM_NO"));
+					tmp.put("ITEM_NAME", rs.getString("ITEM_NAME"));
+					tmp.put("UP_COL_NAME", rs.getString("UP_COL_NAME"));
+					tmp.put("RET_COL", rs.getString("RET_COL"));
+				res.add(tmp);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		this.columns = res;
+		return null;
+	}
+
+	@Override
+	protected String refresh() throws SQLException, Exception {
+		// TODO Auto-generated method stub
+		put();
+		return null;
+	}
+	private void translateMap(Map par){
+		List<Map<String,String>> all = columns;
+		for(Map<String,String> m : all) {
+			if(((Map) par).get("TAB_NAME").equals(m.get("TAB_NAME").trim())&&((Map) par).get("COL_NAME").equals(m.get("COL_NAME").trim())&&((Map) par).get("ITEM_NO").equals(m.get("ITEM_NO").trim())||((Map) par).get("TAB_NAME").equals(m.get("TAB_NAME").trim())&&((Map) par).get("COL_NAME").equals(m.get("COL_NAME").trim())&&"##".equals(m.get("ITEM_NO").trim())){
+				
+				if(m.get("ITEM_NO").equals("##")){
+					Connection con = null;
+					PreparedStatement ps = null;
+					ResultSet rs = null;
+				    try {
+						con =DriverManager.getConnection(url, username, password);
+						ps =con.prepareStatement("Select * from  "+m.get("ITEM_NAME")+"  where "+m.get("UP_COL_NAME")+"= '"+((Map) par).get("ITEM_NO")+"'");
+//						ps.setString(1, m.get("ITEM_NAME"));
+//						ps.setString(2,  m.get("UP_COL_NAME"));
+//						ps.setString(3, (String)((Map) o).get("ITEM_NO"));
+					
+						rs=ps.executeQuery();
+						while(rs.next()){
+							
+						((Map) par).put("ITEM_NO", rs.getString(m.get("RET_COL"))) ;
+					
+						}
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				else{
+					((Map) par).put("ITEM_NO", m.get("ITEM_NAME"));
+				}
+			}
+		}
+	}
+public Object revert(Object o){
+		
+		if(o instanceof Map){
+			translateMap((Map)o);
+		}
+		else if(o instanceof List){
+			for(Object m : (List)o){
+				translateMap((Map)m);
+			}
+		}else if(o instanceof String){
+			JSONObject j=	JSONObject.fromObject(o);
+			
+			Map<String,String> tmp = new HashMap<String, String>();
+			tmp .put("TAB_NAME", j.get("TAB_NAME").toString());
+			tmp .put("COL_NAME", j.get("COL_NAME").toString());
+			tmp .put("ITEM_NO", j.get("ITEM_NO").toString());
+			translateMap(tmp);
+			StringBuilder sb = new StringBuilder();
+			sb.append("{\"TAB_NAME\":").append("\"").append(tmp.get("TAB_NAME")).append("\" ,").append("\"COL_NAME\":\"").append(tmp.get("COL_NAME")).append("\" ,").append("\"ITEM_NO\":\"").append(tmp.get("ITEM_NO")).append("\"}");
+			return sb.toString();
+		}
+		
+	
+		
+		return o;
+	}
+}
